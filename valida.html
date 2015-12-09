@@ -1,0 +1,66 @@
+<html>
+<head>
+<script Language="JavaScript">
+function verificarPalavraPasse(){
+if (document.form.Criar palavra-passe.value == document.form.Confirmar palavra-passe.value)
+{alert ("As duas senhas conferem")
+}
+
+else{
+alert ("As duas senhas não conferem")
+}
+}
+
+
+</script>
+</head>
+<body>
+<form name=cadastro method=post action="index.html">
+Nome: <input type=text name=email><br>
+Sobre Nome: <input type=text name=email><br>
+Email: <input type=text name=email><br>
+Criar palavra-passe: <input type="password" name=senha><br>
+Confirmar palavra-passe: <input type="password" name=senha><br>
+
+
+<fieldset>
+
+  <p class="comment-form-estado">
+   <label for="estado">Estado</label>
+   <select id="estado" name="estado">
+       <option value="">--</option>
+       <option value="AC">AC - Acre</option>
+       <option value="AL">AL - Alagoas</option>
+       <option value="AM">AM - Amazonas</option>
+       <option value="AP">AP - Amapá</option>
+       <option value="BA">BA - Bahia</option>
+       <option value="CE">CE - Ceará</option>
+       <option value="DF">DF - Distrito Federal</option>
+       <option value="ES">ES - Espírito Santo</option>
+       <option value="GO">GO - Goiás</option>
+       <option value="MA">MA - Maranhão</option>
+       <option value="MG">MG - Minas Gerais</option>
+       <option value="MS">MS - Mato Grosso do Sul</option>
+       <option value="MT">MT - Mato Grosso</option>
+       <option value="PA">PA - Pará</option>
+       <option value="PB">PB - Paraíba</option>
+       <option value="PE">PE - Pernambuco</option>
+       <option value="PI">PI - Piauí</option>
+       <option value="PR">PR - Paraná</option>
+       <option value="RJ">RJ - Rio de Janeiro</option>
+       <option value="RN">RN - Rio Grande do Norte</option>
+       <option value="RO">RO - Rondônia</option>
+       <option value="RR">RR - Roraima</option>
+       <option value="RS">RS - Rio Grande do Sul</option>
+       <option value="SC">SC - Santa Catarina</option>
+       <option value="SE">SE - Sergipe</option>
+       <option value="SP">SP - São Paulo</option>
+       <option value="TO">TO - Tocantins</option>
+   </select>
+</p>
+
+</fieldset>
+<input type=submit onclick="return Valida()">
+</form>
+</body>
+</html>

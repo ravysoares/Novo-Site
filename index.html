@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/estilo.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="script.js"></script>
+
+    <link rel="stylesheet" href="CSS/config.css">
+    <meta charset="utf-8">
+
+    <title>Teen Wolf</title>
+  </head>
+
+  <body>
+       <div id ="interface">
+
+       <div id='cssmenu'>
+       <ul>
+          <li class='active'><a href='#'>Home</a></li>
+          <li><a href="temporadas.html">Temporadas</a></li>
+          <li><a href="personagens.html">Elenco</a></li>
+          <li><a href="login.html">Entre ou Cadastre-se</a></li>
+          <li><a href="sistema.html">Veja o Sistema Solar</a></li>
+       </ul>
+       </div>
+
+     <style>
+   		* {margin: 0; padding: 0;}
+   		body {background: #000}
+   		a,img {border: none;}
+   		.trs {-webkit-transition:all ease-out 0.5s;
+   			-moz-transition:all ease-out 0.5s;
+   			-o-transition:all ease-out 0.5s;
+   			-ms-transition:all ease-out 0.5s;
+   			transition:all ease-out 0.5s;}
+
+   		#slider {position: relative; z-index: 1;}
+   		#slider a { position: absolute; top: 0; left: 0; opacity: 0;filter:alpha(opacity=0);}
+   		.ativo {opacity: 1!important; filter:alpha(opacity=100)!important;}
+
+   		/*controladores*/
+   		span {background: #0190EE; cursor: pointer; opacity: 0;filter:alpha(opacity=0); position: absolute; bottom: 40%; width: 43px; height: 43px; z-index: 5;}
+   		.next {right: 10px;}
+   		.next:before,.next:after {left: 21px;}
+   		.next:before {
+   			-webkit-transform: rotate(-42deg);
+   			top: 5px;
+   		}
+   		.next:after {
+   			-webkit-transform: rotate(-132deg);
+   			top: 19px;
+   		}
+   		.next:before,.next:after,.prev:before,.prev:after {content: "";
+   			height: 20px;
+   			background: #fff;
+   			width: 1px;
+   			position: absolute;
+   		}
+   		.prev {left: 10px;}
+   		.prev:before,.prev:after {left: 18px;}
+   		.prev:before {
+   			-webkit-transform: rotate(42deg);
+   			top: 5px;
+   		}
+   		.prev:after {
+   			-webkit-transform: rotate(132deg);
+   			top: 19px;
+   		}
+   		figure:hover span {opacity: 0.76;filter:alpha(opacity=76);}
+   		figure {
+   			max-width: 937px;
+   			height: 354px;
+   			position: relative;
+   			overflow: hidden;
+   			margin: 50px auto;
+   		}
+   		figcaption {padding-left: 20px;color: #fff; font-family: "Kaushan Script","Lato","arial"; font-size: 22px; background: rgba(1, 144, 238, 0.76); width: 100%; position: absolute; bottom: 0; left: 0; line-height: 55px; height: 55px; z-index: 5}
+   	</style>
+
+   	<figure>
+   		<span class="trs next"></span>
+   		<span class="trs prev"></span>
+
+   		<div id="slider">
+   			<a href="#" class="trs"><img src="imagens menu/fedo.jpg" alt="Gosto amargo durante apresentação" /></a>
+   			<a href="#" class="trs"><img src="imagens menu/boy.jpg" alt="Torrent Boy.... Caiu na sua rede deu zebra"/></a>
+        <a href="#" class="trs"><img src="imagens menu/prates.jpg" alt="Penetrado pela galera"/></a>
+        <a href="#" class="trs"><img src="imagens menu/gay.jpg" alt="É menino ou Menina?"/></a>
+   		</div>
+
+   		<figcaption></figcaption>
+   	</figure>
+
+   	<script type="text/javascript">
+   		function setaImagem(){
+   			var settings = {
+   				primeiraImg: function(){
+   					elemento = document.querySelector("#slider a:first-child");
+   					elemento.classList.add("ativo");
+   					this.legenda(elemento);
+   				},
+   				slide: function(){
+   					elemento = document.querySelector(".ativo");
+   					if(elemento.nextElementSibling){
+   						elemento.nextElementSibling.classList.add("ativo");
+   						settings.legenda(elemento.nextElementSibling);
+   						elemento.classList.remove("ativo");
+   					}else{
+   						elemento.classList.remove("ativo");
+   						settings.primeiraImg();
+   					}
+   				},
+   				proximo: function(){
+   					clearInterval(intervalo);
+   					elemento = document.querySelector(".ativo");
+
+   					if(elemento.nextElementSibling){
+   						elemento.nextElementSibling.classList.add("ativo");
+   						settings.legenda(elemento.nextElementSibling);
+   						elemento.classList.remove("ativo");
+   					}else{
+   						elemento.classList.remove("ativo");
+   						settings.primeiraImg();
+   					}
+   					intervalo = setInterval(settings.slide,4000);
+   				},
+   				anterior: function(){
+   					clearInterval(intervalo);
+   					elemento = document.querySelector(".ativo");
+
+   					if(elemento.previousElementSibling){
+   						elemento.previousElementSibling.classList.add("ativo");
+   						settings.legenda(elemento.previousElementSibling);
+   						elemento.classList.remove("ativo");
+   					}else{
+   						elemento.classList.remove("ativo");
+   						elemento = document.querySelector("a:last-child");
+   						elemento.classList.add("ativo");
+   						this.legenda(elemento);
+   					}
+   					intervalo = setInterval(settings.slide,4000);
+   				},
+   				legenda: function(obj){
+   					var legenda = obj.querySelector("img").getAttribute("alt");
+   					document.querySelector("figcaption").innerHTML = legenda;
+   				}
+   			}
+   			//chama o slide
+   			settings.primeiraImg();
+   			//chama a legenda
+   			settings.legenda(elemento);
+   			//chama o slide à um determinado tempo
+   			var intervalo = setInterval(settings.slide,4000);
+   			document.querySelector(".next").addEventListener("click",settings.proximo,false);
+   			document.querySelector(".prev").addEventListener("click",settings.anterior,false);
+   		}
+   		window.addEventListener("load",setaImagem,false);
+   	</script>
+
+
+<article>
+<h1><center>Teen Wolf</center></h1>
+
+
+  <p>  Teen Wolf é uma série americana desenvolvida por Jeff Davis para a MTV. Ela é vagamente baseada no filme homônimo de 1985 e protagonizada por Tyler Posey como o adolescente Scott McCall, que é mordido por um lobisomem.</p>
+
+    <p>Teen Wolf estreou sua primeira temporada em 05 de junho de 2011, na sequência do MTV Movie Awards 2011.</p>
+
+    <p>A segunda temporada estreou em 03 de junho de 2012, na sequência do MTV Movie Awards 2012.</p>
+
+    <p>Em 12 de julho de 2012, Teen Wolf foi renovada para uma terceira temporada, que ao contrário das outras inclui 24 episódios e o local de produção foi transferido para Los Angeles, Califórnia. A terceira temporada estreou em 3 de junho de 2013, dando a série uma nova alta classificação e audiência.</p>
+
+    <p>A quarta temporada estreou em 23 de junho de 2014.</p>
+
+    <p>Em 24 de julho de 2014, a MTV renovou Teen Wolf para uma quinta temporada, desta vez com 20 episódios que serão divididos em duas partes. A quinta temporada teve sua estreia no dia 29 de junho de 2015, tendo uma premiere dupla com seu segundo episódio exibido no dia seguinte, 30 de junho. A segunda parte da quinta temporada, a 5B, sem data de estreia definida, tem previsão para janeiro de 2016. </p>
+
+    <p>Em 9 de julho de 2015, a série foi renovada para a sua sexta temporada durante a San Diego Comic-Con. Quanto ao número de episódios, a MTV já confirmou que serão 20, provavelmente divididos em duas partes, igual a quinta temporada. 20, provavelmente divididos em duas partes, igual a quinta temporada.</p>
+
+    <p>A série recebeu uma resposta positiva dos críticos em geral</p>
+
+
+
+</article>
+
+<article>
+    <h1>Desenvolvimento e produção</h1>
+
+    <p>Em junho de 2009 a MTV revelou estar trabalhando em um projeto para resgatar Teen Wolf do bau antigo. Esta é a segunda adaptação para a TV do filme. Uma versão animada foi ao ar na CBS 1986-87. Diretor australiano Russell Mulcahy dirigido a apresentação do piloto. O lobo da MTV tornou-se uma re-imaginação do filme Michael J. Fox a partir de 85 com o criador e produtor-executivo, Jeff Davis desenvolvendo uma versão mais escura, mais sexy e mais ousado do que o original. Desejo de Davis era fazer um filme de suspense com toques de comédia com um tom mais semelhante ao de The Lost. Uma vez que o show foi um sucesso, Davis alinhados Russell Mulcahy, que acrescentou o horror ao projeto. De acordo com Davis, tudo começou com uma idéia de fazer uma homenagem ao Stand by Me, no início, onde as crianças sair e procurar um corpo no mato e não é bem o que eles esperam. No olhar lobisomem eles quiseram um ar mais a labirinto do fauno. Criaturas Guillermo Del Toro foram uma inspiração, descrevendo-as como bonitas, elegantes e assustadoras, ao mesmo tempo. Anúncios de fundição foram anunciados em dezembro de 2010, com o elenco principal é, Tyler Posey, Crystal Reed, Tyler Hoechlin, Dylan O'Brien, Holland Roden e Colton Haynes.</p>
+
+</article>
+
+<article>
+    <h1>Recepção</h1>
+
+    <h2>Critica</h2>
+
+  <p>  A série gerou uma critica positiva para respostas divergentes de críticos profissionais, com alguns elogiando-o como melhor qualidade quando comparados com outros shows da MTV. De acordo com o Metacritic, que atribui uma classificação normalizada em cada 100 das opiniões de críticos a serie possui uma pontuação média de 61 dos 100, que indica "Geralmente opiniões favoráveis", com base em 14 comentários. Metacritic também lista a série de maior audiência da MTV por críticos profissionais. Linda Stasi, uma escritora do New York Post, concedido estréia a série 'uma pontuação perfeita, afirmando: "Que a séria seria ótima para reunir o público adolescente, que era o foco da MTV".</p>
+
+    <p>Após o final da primeira temporada em agosto de 2011, Ian Grey de indieWire deu à série uma revisão positiva e Angel Cohn de Television Without Pity dizendo que a série era a terceira melhor estréia de do verão. Já a BuddyTV clasificou a série como a quarta melhor nova série do ano de 2011, e ainda fez uma comparação a outra série de drama sobrenatural, The Vampire Diaries.</p>
+</article>
+<article>
+    <h2>Audiência</h2>
+
+    <p>A estréia da série atraiu um total de 2,17 milhões de telespectadores nos EUA. Depois de ventilar seu terceiro episódio, Teen Wolf foi relatado para estar caminhando para sua quarta semana com uma enorme dinamismo na sequência de um aumento de 23% na publico. Teen Wolf foi o primeiro show da MTV conseguir uma média de 2,1 milhões espectadores em geral, no final da primeira temporada.</p>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+  </body>
+</html>
